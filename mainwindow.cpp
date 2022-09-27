@@ -13,3 +13,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::resiveRoundResult(ClickGame::RoundResultStatus st)
+{
+
+}
+
+void MainWindow::displayRequiredNumofClick(int numof_click)
+{
+
+}
