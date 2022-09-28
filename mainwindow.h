@@ -49,6 +49,13 @@ private:
     void mousePressEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMoveEvent *event);
 
+    /*!
+     * \brief closeEvent - метод обработки закрытия программы
+     * \details При закрытии программы происходит остановка игры и отображение окна пожелания.
+     * \param event
+     */
+    void closeEvent(QCloseEvent *event);
+
 public slots:
     /*!
      * \brief resiveRoundResult - слот приема результата прошедшего раунда

@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QPainter>
 #include <QButtonGroup>
-#include <QDebug>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -52,6 +52,13 @@ void MainWindow::mouseDoubleClickEvent(QMoveEvent *event)
     Q_UNUSED(event)
     m_game->addClick();
     m_game->addClick();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+     Q_UNUSED(event)
+    m_game->stop();
+    QMessageBox::information(this, "Пожелание", "Приходите еще!", "Обязательно приду!");
 }
 
 void MainWindow::resiveRoundResult(ClickGame::RoundResultStatus st)
