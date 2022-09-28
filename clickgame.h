@@ -16,11 +16,12 @@ class ClickGame : public QObject
 public:
     enum RoundResultStatus
     {
-        Win,    // признак соответсвия количества требуемых и количества сделаных кликов
-        Failure // признак не соответсвия количества требуемых и количества сделаных кликов
+        Win,    // признак соответсвия количества требуемых и сделаных кликов
+        Failure // признак не соответсвия количества требуемых и сделаных кликов
     };
 
     explicit ClickGame(int period_of_round, int max_number_of_click, QObject *parent = nullptr);
+    ~ClickGame();
 
     /*!
      * \brief start - метод для старта игры
@@ -37,6 +38,18 @@ public:
      */
     void addClick();
 
+    /*!
+     * \brief getWinCount - метод получения количества выигранных раундов
+     * \return количество выигранных раундов
+     */
+    int getWinCount();
+
+    /*!
+     * \brief getFailureCount - метод получения количества проигранных раундов
+     * \return количество проигранных раундов
+     */
+    int getFailureCount();
+
 signals:
     /*!
      * \brief roundResult - Сигнал для передачи результата раунда игры
@@ -51,14 +64,27 @@ signals:
     void newNumberOfClick(int number_of_lick);
 
 private:
-    int m_timer_id = -1;
-    int m_period_of_round = -1;
-    int m_max_numof_click = -1;
+    int m_timer_id = -1;                //!< id таймера игры
+    int m_period_of_round = -1;         //!< длительность одного раунда
+    int m_max_numof_click = -1;         //!< максимальное количество требуемых нажатий в раунде
 
-    int m_current_numof_click = -1;
-    int m_required_numof_click = -1;
+    int m_current_numof_click = -1;     //!< текущее число нажатий
+    int m_required_numof_click = -1;    //!< требуемое число нажатий
 
+    int m_win_count = -1;               //!< количество выигранных раундов
+    int m_failure_count = -1;           //!< количество програнных раундов
+
+    /*!
+     * \brief timerEvent - метод обработки события таймера
+     * \details Происходит проверка текущего количества нажатий и подготовка данных для следующего раунда
+     * \param event
+     */
     void timerEvent(QTimerEvent *event);
+
+    /*!
+     * \brief setNewRequiredNumber - метод подготовки нового требуемого числа нажатий
+     */
+    void setNewRequiredNumber();
 };
 
 #endif // CLICKGAME_H
