@@ -18,14 +18,16 @@ class MainWindow : public QMainWindow
 
     std::unique_ptr<ClickGame> m_game;
 
-    int m_alpha_color = 0;
-    QColor m_color_of_signal = QColor(255,150,100,m_alpha_color);
+    std::array<QColor,2> m_color_of_number = {QColor(255,150,100), QColor(10,150,255)};
 
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
+
+    void InitManageGroup();
+    void mousePressEvent(QMouseEvent *event);
 
 public slots:
     /*!
@@ -39,5 +41,9 @@ public slots:
      * \param numof_click - количество нажатий
      */
     void displayRequiredNumofClick(int numof_click);
+private slots:
+
+    void on_start_toggled(bool checked);
+    void on_stop_toggled(bool checked);
 };
 #endif // MAINWINDOW_H

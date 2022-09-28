@@ -1,4 +1,4 @@
-QT       += widgets
+QT       += core gui widgets
 
 TARGET = ClickGame
 TEMPLATE = app
